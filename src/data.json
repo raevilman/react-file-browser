@@ -1,0 +1,165 @@
+{
+  "data": [
+    {
+      "name": "root",
+      "folders": [
+        {
+          "name": "public",
+          "folders": [],
+          "files": [
+            {
+              "name": "index.html",
+              "meta": [
+                {
+                  "createdDate": "1586193380",
+                  "lastModifiedDate": "1586193395",
+                  "owner": {
+                    "name" : "RD"
+                  },
+                  "description": "Description of the file",
+                  "size": "128KB"
+                }
+              ],
+              "path": "./public/index.html"
+            },
+            {
+              "name": "favicon.ico",
+              "meta": [
+                {
+                  "createdDate": "1586193380",
+                  "lastModifiedDate": "1586193395",
+                  "owner": {
+                    "name" : "RD"
+                  },
+                  "description": "Description of the file",
+                  "size": "128KB"
+                }
+              ],
+              "path": "./public/index.html"
+            }
+          ]
+        },
+        {
+          "name": "src",
+          "folders": [
+            {
+              "name": "components",
+              "folders": [
+                {
+                    "name": "HelloWorld",
+                    "folders": [],
+                    "files": [
+                      {
+                        "name": "index.tsx",
+                        "meta": [
+                          {
+                            "createdDate": "1586193380",
+                            "lastModifiedDate": "1586193395",
+                            "owner": {
+                              "name" : "RD"
+                            },
+                            "description": "Description of the file",
+                            "size": "128KB"
+                          }
+                        ],
+                        "path": "./public/index.html"
+                      },
+                      {
+                        "name": "index.css",
+                        "meta": [
+                          {
+                            "createdDate": "1586193380",
+                            "lastModifiedDate": "1586193395",
+                            "owner": {
+                              "name" : "RD"
+                            },
+                            "description": "Description of the file",
+                            "size": "128KB"
+                          }
+                        ],
+                        "path": "./public/index.html"
+                      }
+                    ]
+                  }
+              ],
+              "files": []
+            }
+          ],
+          "files": [
+            {
+              "name": "index.tsx",
+              "meta": [
+                {
+                  "createdDate": "1586193380",
+                  "lastModifiedDate": "1586193395",
+                  "owner": {
+                    "name" : "RD"
+                  },
+                  "description": "Description of the file",
+                  "size": "128KB"
+                }
+              ],
+              "path": "./public/index.html"
+            },
+            {
+              "name": "index.css",
+              "meta": [
+                {
+                  "createdDate": "1586193380",
+                  "lastModifiedDate": "1586193395",
+                  "owner": {
+                    "name" : "RD"
+                  },
+                  "description": "Description of the file",
+                  "size": "128KB"
+                }
+              ],
+              "path": "./public/index.html"
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "name": "package.json",
+          "meta": [
+            {
+              "createdDate": {},
+              "lastModifiedDate": {},
+              "owner": {},
+              "description": {},
+              "size": {}
+            }
+          ],
+          "path": {}
+        },
+        {
+          "name": "README.md",
+          "meta": [
+            {
+              "createdDate": {},
+              "lastModifiedDate": {},
+              "owner": {},
+              "description": {},
+              "size": {}
+            }
+          ],
+          "path": {}
+        },
+        {
+          "name": "index.js",
+          "meta": [
+            {
+              "createdDate": {},
+              "lastModifiedDate": {},
+              "owner": {},
+              "description": {},
+              "size": {}
+            }
+          ],
+          "path": {}
+        }
+      ]
+    }
+  ]
+}
