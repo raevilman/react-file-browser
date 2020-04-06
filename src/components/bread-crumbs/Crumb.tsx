@@ -1,6 +1,11 @@
 import React from 'react';
 
-const Crumb = ({ text, selected }: { text: string, selected: boolean }) => {
+interface Props {
+  text: string, 
+  selected?: boolean
+}
+
+const Crumb = ({ text, selected } : Props) => {
   return <a href="#" onClick={() => alert(selected)}>{text} / </a>
 }
 
