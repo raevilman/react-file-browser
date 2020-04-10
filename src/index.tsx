@@ -20,10 +20,21 @@ export class ReactFileBrowser extends React.Component<Props> {
   render() {
     return(
       <div>
-        <div className={styles.test}>Example Component: {this.props.text}</div>
-        <BreadCrumbs 
-          crumbs = {['src', 'component', 'bread-crums']}
-        />
+        <div className={styles.container}>
+          <section className={styles.breadsSection}>
+            <BreadCrumbs 
+              crumbs = {['src', 'component', 'bread-crums']}
+            />
+          </section>
+          <main className={styles.mainSection}>
+           <section className={styles.foldersSection}>
+            <p>This is folder</p>
+           </section>
+           <section className={styles.filesSection}>
+            <p>This is files</p>
+           </section>
+          </main>
+        </div>
       </div>
     )
   }

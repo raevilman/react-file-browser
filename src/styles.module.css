@@ -8,3 +8,53 @@
   text-align: center;
   color: blue
 }
+:root {
+  --main-bg-color: coral;
+  --main-txt-color: blue; 
+  --main-padding: 15px; 
+
+  --min-width: 380px;
+}
+
+.container {
+  background-color: lightgray;
+  border: 1px solid crimson;
+  min-width: var(--min-width);
+}
+
+.mainSection {
+  display: flex;
+}
+
+.breadsSection {
+  background-color: lightyellow;
+  border: 1px solid crimson;
+  text-align: center;
+}
+
+.foldersSection {
+  background-color: lightcyan;
+  border: 1px solid crimson;
+}
+
+.filesSection {
+  background-color: lightpink;
+  border: 1px solid crimson;
+}
+
+/* @media only screen 
+  and (min-device-width: 380px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .mainSection {
+      display: flex;
+    }
+} */
+
+@media only screen 
+  and (max-device-width: px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .mainSection {
+      display: flex;
+      flex-direction: column;
+    }
+}

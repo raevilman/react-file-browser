@@ -1,5 +1,5 @@
 import React from 'react';
-import Crumb from './Crumb';
+import Crumb from '../crumb/Crumb';
 
 interface Props {
   crumbs: string[]

@@ -1,4 +1,5 @@
 import React from 'react';
+import Styles from './index.module.css';
 
 interface Props {
   text: string, 
@@ -6,7 +7,7 @@ interface Props {
 }
 
 const Crumb = ({ text, selected } : Props) => {
-  return <a href="#" onClick={() => alert(selected)}>{text} / </a>
+  return <span className={Styles.color} onClick={() => alert(selected)}>{text} / </span>
 }
 
 export default Crumb
