@@ -18,7 +18,7 @@ export default class BreadCrumbs extends React.Component<Props, State> {
     return (
       <div>
        {
-         this.props.crumbs.map(crumb => <Crumb text={crumb} selected={false} />)
+         this.props.crumbs.map((crumb, index) => <Crumb key={index} text={crumb} selected={false} />)
        }
       </div>
     )
