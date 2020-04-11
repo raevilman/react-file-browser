@@ -1,106 +1,111 @@
-import * as React from 'react'
-import styles from './styles.module.css'
-import * as data from './data.json';
-import BreadCrumbs from './components/bread-crumbs/BreadCrumbs'
-import Folder from './components/folder/Folder';
-import SectionHeading from './components/section-heading/SectionHeading';
+import * as React from "react";
+import styles from "./styles.module.css";
+import data2 from "./data2.json";
+import BreadCrumbs from "./components/bread-crumbs/BreadCrumbs";
+import Folder from "./components/folder/Folder";
+import SectionHeading from "./components/section-heading/SectionHeading";
 
 interface Props {
-  text: string
+  text: string;
 }
 
-export class ReactFileBrowser extends React.Component<Props> {
+interface State {
+  selectedKey: number;
+  currentFolderList: string[];
+  currentFilesList: string[];
+  currentPath: string;
+}
+
+export class ReactFileBrowser extends React.Component<Props, State> {
   constructor(props: Props) {
-    super(props)
+    super(props);
+    this.state = {
+      selectedKey: 0,
+      currentFolderList: [],
+      currentFilesList: [],
+      currentPath: ""
+    };
   }
 
   componentDidMount() {
-    console.log('mounted')
-    console.log(data)
+    this.populateFolderList(data2);
   }
+
+  populateFolderList = (folders: {}) => {
+    this.setState(
+      {
+        currentFolderList: Object.keys(folders).filter(
+          key => !folders[key].__file__
+        )
+      },
+      () => this.populateFileList(folders)
+    );
+  };
+
+  populateFileList = (folder: {}) => {
+    this.setState({
+      currentFilesList: Object.keys(folder).filter(key => folder[key].__file__)
+    });
+  };
+
+  handleFolderClick = (folderName: string, path: string) => {
+    console.log("CURRENT PATH", this.state.currentPath);
+    console.log("PATH", path);
+
+    const pathReducer = (acc: string, curr: string) => acc[curr];
+
+    const data = path.split("/").reduce(pathReducer, data2);
+
+    this.setState({
+      currentPath:
+        this.state.currentPath != ""
+          ? [this.state.currentPath, folderName].join("/")
+          : folderName
+    });
+
+    this.populateFolderList(data);
+  };
 
   render() {
     return (
       <div>
         <div className={styles.container}>
           <section className={styles.breadsSection}>
-            <BreadCrumbs
-              crumbs={['src', 'component', 'bread-crums']}
-            />
+            <BreadCrumbs crumbs={["src", "component", "bread-crums"]} />
           </section>
           <main className={styles.mainSection}>
-          <section className={styles.foldersSectionPassive}>
+            <section className={styles.foldersSectionPassive}>
               <SectionHeading text="folders under `aws`" />
-              <div className={styles.foldersList}>
-                <Folder text="I am first folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am last folder" />
-              </div>
-
+              <div className={styles.foldersList}></div>
             </section>
             <section className={styles.foldersSectionActive}>
               <SectionHeading text="folders under `aws`" />
               <div className={styles.foldersList}>
-                <Folder text="I am first folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am a folder with a really long name so that it messes up my developers effort" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am folder" />
-                <Folder text="I am last folder" />
+                {this.state.currentFolderList.map((folderName, index) => (
+                  <Folder
+                    key={index}
+                    folderName={folderName}
+                    path={
+                      this.state.currentPath != ""
+                        ? [this.state.currentPath, folderName].join("/")
+                        : folderName
+                    }
+                    clickHandler={this.handleFolderClick}
+                  />
+                ))}
               </div>
-
             </section>
             <section className={styles.filesSection}>
               <SectionHeading text="files under `aws`" />
-
               <div className="filesList">
-                <p>This is first files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is files 1</p>
-                <p>This is last file</p>
+                {this.state.currentFilesList.map((fileName, index) => (
+                  <p key={index}>{fileName}</p>
+                ))}
               </div>
             </section>
           </main>
         </div>
       </div>
-    )
+    );
   }
 }

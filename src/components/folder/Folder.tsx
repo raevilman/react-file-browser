@@ -3,14 +3,16 @@ import Styles from './index.module.css';
 import FolderIcon from '../folder-icon/FolderIcon'
 
 interface Props {
-  text: string
+  folderName: string,
+  clickHandler: (folderName: string, path: string) => void,
+  path: string
 }
 
-const Folder = ({ text } : Props) => {
+const Folder = ({ folderName, clickHandler, path } : Props) => {
   return (
-    <div className={Styles.folderSvg}>
+    <div className={Styles.folderSvg} onClick={() => clickHandler(folderName, path)}>
       <FolderIcon /> 
-      <p>{text}</p>
+      <p>{folderName}</p>
     </div>
   )
 }
