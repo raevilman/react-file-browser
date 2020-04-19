@@ -1,111 +1,89 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import data2 from "./data2.json";
 import BreadCrumbs from "./components/bread-crumbs/BreadCrumbs";
 import Folder from "./components/folder/Folder";
 import SectionHeading from "./components/section-heading/SectionHeading";
 
-interface Props {
-  text: string;
-}
+export function ReactFileBrowser() {
 
-interface State {
-  selectedKey: number;
-  currentFolderList: string[];
-  currentFilesList: string[];
-  currentPath: string;
-}
+  const [currentFolderList, setCurrentFolderList] = useState<string[]>([]);
+  const [currentFilesList, setCurrentFilesList] = useState<string[]>([]);
+  const [currentPathArr, setCurrentPathArr] = useState<string[]>([]);
+  const [currentPath, setCurrentPath] = useState<string>("");
+  const [currentFolderName, setCurrentFolderName] = useState<string>("");
 
-export class ReactFileBrowser extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      selectedKey: 0,
-      currentFolderList: [],
-      currentFilesList: [],
-      currentPath: ""
-    };
+  useEffect(() => {
+    populateFoldersAndFiles(data2);
+  }, [])
+
+  useEffect(() => {
+    setCurrentPath(currentPathArr.join('/'));
+    updateView();
+  }, [currentPathArr])
+
+  const populateFoldersAndFiles = (folders: {}) => {
+    const folderList: string[] = Object.keys(folders).filter(
+      key => !folders[key].__file__
+    )
+    setCurrentFolderList(folderList)
+    const filesList = Object.keys(folders).filter(key => folders[key].__file__);
+    setCurrentFilesList(filesList);
   }
 
-  componentDidMount() {
-    this.populateFolderList(data2);
-  }
-
-  populateFolderList = (folders: {}) => {
-    this.setState(
-      {
-        currentFolderList: Object.keys(folders).filter(
-          key => !folders[key].__file__
-        )
-      },
-      () => this.populateFileList(folders)
-    );
-  };
-
-  populateFileList = (folder: {}) => {
-    this.setState({
-      currentFilesList: Object.keys(folder).filter(key => folder[key].__file__)
-    });
-  };
-
-  handleFolderClick = (folderName: string, path: string) => {
-    console.log("CURRENT PATH", this.state.currentPath);
-    console.log("PATH", path);
-
+  const updateView = () => {
     const pathReducer = (acc: string, curr: string) => acc[curr];
+    const folderData = currentPathArr.reduce(pathReducer, data2);
+    populateFoldersAndFiles(folderData);
+  }
 
-    const data = path.split("/").reduce(pathReducer, data2);
-
-    this.setState({
-      currentPath:
-        this.state.currentPath != ""
-          ? [this.state.currentPath, folderName].join("/")
-          : folderName
-    });
-
-    this.populateFolderList(data);
+  const handleFolderClick = (folderName: string, path: string) => {
+    console.log(path);
+    setCurrentPathArr(currentPathArr.concat(folderName))
+    setCurrentFolderName(folderName)
   };
 
-  render() {
-    return (
-      <div>
-        <div className={styles.container}>
-          <section className={styles.breadsSection}>
-            <BreadCrumbs crumbs={["src", "component", "bread-crums"]} />
-          </section>
-          <main className={styles.mainSection}>
-            <section className={styles.foldersSectionPassive}>
-              <SectionHeading text="folders under `aws`" />
-              <div className={styles.foldersList}></div>
-            </section>
-            <section className={styles.foldersSectionActive}>
-              <SectionHeading text="folders under `aws`" />
-              <div className={styles.foldersList}>
-                {this.state.currentFolderList.map((folderName, index) => (
-                  <Folder
-                    key={index}
-                    folderName={folderName}
-                    path={
-                      this.state.currentPath != ""
-                        ? [this.state.currentPath, folderName].join("/")
-                        : folderName
-                    }
-                    clickHandler={this.handleFolderClick}
-                  />
-                ))}
-              </div>
-            </section>
-            <section className={styles.filesSection}>
-              <SectionHeading text="files under `aws`" />
-              <div className="filesList">
-                {this.state.currentFilesList.map((fileName, index) => (
-                  <p key={index}>{fileName}</p>
-                ))}
-              </div>
-            </section>
-          </main>
-        </div>
-      </div>
-    );
+  const handleNavigation = (navIndex: number) => {
+    setCurrentPathArr(currentPathArr.splice(0, navIndex+1))
   }
+
+  return (
+    <div>
+      <div className={styles.container}>
+        <section className={styles.breadsSection}>
+          <BreadCrumbs 
+            path={currentPathArr} 
+            navigationHandler={handleNavigation}
+          />
+        </section>
+        <main className={styles.mainSection}>
+          <section className={styles.foldersSectionPassive}>
+            <SectionHeading text={`folders under ${currentFolderName}`} />
+            <div className={styles.foldersList}></div>
+          </section>
+          <section className={styles.foldersSectionActive}>
+            <SectionHeading text={`folders under ${currentFolderName}`} />
+            <div className={styles.foldersList}>
+              {currentFolderList.map((folderName, index) => (
+                <Folder
+                  key={index}
+                  folderName={folderName}
+                  path={currentPath}
+                  clickHandler={handleFolderClick}
+                />
+              ))}
+            </div>
+          </section>
+          <section className={styles.filesSection}>
+            <SectionHeading text={`files under ${currentFolderName}`} />
+            <div className="filesList">
+              {currentFilesList.map((fileName, index) => (
+                <p key={index}>{fileName}</p>
+              ))}
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  );
 }
