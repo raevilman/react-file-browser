@@ -1,0 +1,38 @@
+{
+  "src" : {
+    "components": {
+      "helloWorld" : {
+        "static": {
+        },
+        "index.html" : {
+          "__file__" : true,
+          "meta": [
+            {
+              "createdDate": "1586193380",
+              "lastModifiedDate": "1586193395",
+              "owner": {
+                "name" : "RD"
+              },
+              "description": "Description of the file",
+              "size": "128KB"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "public" : {
+    "index.html": {
+      "__file__": true
+    }
+  },
+  "package.json" : {
+    "__file__" : true
+  },
+  ".gitignore" : {
+    "__file__" : true
+  },
+  "files": {
+
+  }
+}

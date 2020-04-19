@@ -1,0 +1,90 @@
+/* add css module styles here (optional) */
+
+:root {
+  --min-width: 380px;
+  --min-height: 440px;
+}
+
+.container {
+  background-color: whitesmoke;
+  min-width: var(--min-width);
+  min-height: var(--min-height);
+  height: 500px;
+}
+
+
+.breadsSection {
+  background-color: lightyellow;
+  text-align: center;
+}
+
+.mainSection {
+  height: 100%;
+  background-color: yellowgreen;
+  display: flex;
+  justify-content: center;
+}
+
+.foldersSectionPassive {
+  flex: 1;
+  background-color: lightcyan;
+  overflow-x: scroll;
+  padding: 8px;
+  margin: 8px;
+}
+
+.foldersSectionActive {
+  flex: 1;
+  background-color: lightcyan;
+  overflow-x: scroll;
+  padding: 8px;
+  margin: 8px;
+}
+
+.foldersList {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filesSection {
+  flex: 1;
+  background-color: lightpink;
+  overflow-y: scroll;
+  padding: 8px;
+  margin: 8px;
+}
+
+p.sectionLabel {
+  font-family: monospace;
+}
+
+
+
+@media only screen 
+  and (max-device-width: 768px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+    .container {
+      max-width: 100vw;
+      max-height: 100vh;
+      margin: 8px;
+      height: 80vh;
+    }
+    .mainSection {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+
+    }
+    .foldersSectionPassive {
+      display: none;
+    }
+    .foldersSectionActive {
+      height: 30%;
+      max-height: 30%;
+    }
+    .filesSection {
+      height: 70%;
+      max-height: 70%;
+    }
+}

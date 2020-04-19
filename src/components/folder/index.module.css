@@ -1,0 +1,15 @@
+.color {
+  color: var(--main-txt-color);
+}
+
+.folderSvg {
+  display: inline-block;
+  text-align: center;
+  margin: 4px;
+  padding: 8px;
+  /* background-color: tomato; */
+}
+
+.folderSvg > p {
+  margin-top: 5px;
+}
